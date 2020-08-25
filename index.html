@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/Estados_1.js"></script>
+        <script src="data/Datos_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[12.464821071379301,-101.7768442321983],[24.865705068146557,-86.22546538219828]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_Estados_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PERIMETER'] !== null ? autolinker.link(feature.properties['PERIMETER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DESTDV1MG_'] !== null ? autolinker.link(feature.properties['DESTDV1MG_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DESTDV1MG__1'] !== null ? autolinker.link(feature.properties['DESTDV1MG__1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUM_EDO'] !== null ? autolinker.link(feature.properties['NUM_EDO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>ENTIDAD</strong><br />' + (feature.properties['ENTIDAD'] !== null ? autolinker.link(feature.properties['ENTIDAD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CAPITAL</th>\
+                        <td>' + (feature.properties['CAPITAL'] !== null ? autolinker.link(feature.properties['CAPITAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RASGO_GEOG'] !== null ? autolinker.link(feature.properties['RASGO_GEOG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Estados_1_0() {
+            return {
+                pane: 'pane_Estados_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Estados_1');
+        map.getPane('pane_Estados_1').style.zIndex = 401;
+        map.getPane('pane_Estados_1').style['mix-blend-mode'] = 'normal';
+        var layer_Estados_1 = new L.geoJson(json_Estados_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Estados_1',
+            layerName: 'layer_Estados_1',
+            pane: 'pane_Estados_1',
+            onEachFeature: pop_Estados_1,
+            style: style_Estados_1_0,
+        });
+        bounds_group.addLayer(layer_Estados_1);
+        map.addLayer(layer_Estados_1);
+        function pop_Datos_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>ID_SOTA</strong><br />' + (feature.properties['ID_SOTA'] !== null ? autolinker.link(feature.properties['ID_SOTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CAT_PRO</th>\
+                        <td>' + (feature.properties['CAT_PRO'] !== null ? autolinker.link(feature.properties['CAT_PRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">UR_R15</th>\
+                        <td>' + (feature.properties['UR_R15'] !== null ? autolinker.link(feature.properties['UR_R15'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PROYECTO</th>\
+                        <td>' + (feature.properties['PROYECTO'] !== null ? autolinker.link(feature.properties['PROYECTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PRO_R15'] !== null ? autolinker.link(feature.properties['PRO_R15'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ORI_PRO'] !== null ? autolinker.link(feature.properties['ORI_PRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PP_PND'] !== null ? autolinker.link(feature.properties['PP_PND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUM_VIV'] !== null ? autolinker.link(feature.properties['NUM_VIV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO_ACC'] !== null ? autolinker.link(feature.properties['TIPO_ACC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO_VIV'] !== null ? autolinker.link(feature.properties['TIPO_VIV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_ENT'] !== null ? autolinker.link(feature.properties['NOM_ENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_MUN'] !== null ? autolinker.link(feature.properties['NOM_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOIM_LOC'] !== null ? autolinker.link(feature.properties['NOIM_LOC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PREDIO'] !== null ? autolinker.link(feature.properties['PREDIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['X_LON'] !== null ? autolinker.link(feature.properties['X_LON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Y_LAT'] !== null ? autolinker.link(feature.properties['Y_LAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PRO_PREV'] !== null ? autolinker.link(feature.properties['PRO_PREV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MONTO'] !== null ? autolinker.link(feature.properties['MONTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOTA'] !== null ? autolinker.link(feature.properties['NOTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Datos_2_0(feature) {
+            switch(String(feature.properties['UR_R15'])) {
+                case 'CGGIRD':
+                    return {
+                pane: 'pane_Datos_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(198,229,136,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CIIT':
+                    return {
+                pane: 'pane_Datos_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,48,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cultura':
+                    return {
+                pane: 'pane_Datos_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,41,69,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'DGCAM':
+                    return {
+                pane: 'pane_Datos_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(156,118,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'DGCMM':
+                    return {
+                pane: 'pane_Datos_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(18,110,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'INIFED':
+                    return {
+                pane: 'pane_Datos_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(76,228,200,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Municipios':
+                    return {
+                pane: 'pane_Datos_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,162,96,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Datos_2');
+        map.getPane('pane_Datos_2').style.zIndex = 402;
+        map.getPane('pane_Datos_2').style['mix-blend-mode'] = 'normal';
+        var layer_Datos_2 = new L.geoJson(json_Datos_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Datos_2',
+            layerName: 'layer_Datos_2',
+            pane: 'pane_Datos_2',
+            onEachFeature: pop_Datos_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Datos_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Datos_2);
+        map.addLayer(layer_Datos_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Datos<br /><table><tr><td style="text-align: center;"><img src="legend/Datos_2_CGGIRD0.png" /></td><td>CGGIRD</td></tr><tr><td style="text-align: center;"><img src="legend/Datos_2_CIIT1.png" /></td><td>CIIT</td></tr><tr><td style="text-align: center;"><img src="legend/Datos_2_Cultura2.png" /></td><td>Cultura</td></tr><tr><td style="text-align: center;"><img src="legend/Datos_2_DGCAM3.png" /></td><td>DGCAM</td></tr><tr><td style="text-align: center;"><img src="legend/Datos_2_DGCMM4.png" /></td><td>DGCMM</td></tr><tr><td style="text-align: center;"><img src="legend/Datos_2_INIFED5.png" /></td><td>INIFED</td></tr><tr><td style="text-align: center;"><img src="legend/Datos_2_Municipios6.png" /></td><td>Municipios</td></tr></table>': layer_Datos_2,'<img src="legend/Estados_1.png" /> Estados': layer_Estados_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_Datos_2,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'ID_SOTA'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        </script>
+    </body>
+</html>
